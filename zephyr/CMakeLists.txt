@@ -130,6 +130,8 @@ if(CONFIG_LIBOQS)
 
         if(CONFIG_LIBOQS_ENABLE_SIG_CROSS)
                 set(OQS_ENABLE_SIG_CROSS ON)
+                set(OQS_ENABLE_SIG_cross_rsdp_128_balanced OFF)
+                set(OQS_ENABLE_SIG_cross_rsdp_128_balanced_avx2 OFF)
         else()  
                 set(OQS_ENABLE_SIG_CROSS OFF)
         endif()
