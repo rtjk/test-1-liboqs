@@ -36,7 +36,7 @@ jobs:
 #          username: $DOCKER_LOGIN
 #          password: $DOCKER_PASSWORD
     steps:
-      - checkout # change this from "checkout" to "*localCheckout" when running CircleCI locally
+      - *localCheckout # change this from "checkout" to "*localCheckout" when running CircleCI locally
       - run:
           name: Ensure code conventions are upheld
           command: python3 -m pytest --verbose tests/test_code_conventions.py
@@ -63,7 +63,7 @@ jobs:
     docker:
       - image: << parameters.CONTAINER >>
     steps:
-      - checkout # change this from "checkout" to "*localCheckout" when running CircleCI locally
+      - *localCheckout # change this from "checkout" to "*localCheckout" when running CircleCI locally
       - run:
           name: Configure
           command: |2
@@ -106,7 +106,7 @@ jobs:
 #          username: $DOCKER_LOGIN
 #          password: $DOCKER_PASSWORD
     steps:
-      - checkout # change this from "checkout" to "*localCheckout" when running CircleCI locally
+      - *localCheckout # change this from "checkout" to "*localCheckout" when running CircleCI locally
       - run:
           name: Configure
           command: mkdir build && cd build && source ~/.bashrc && cmake -GNinja << parameters.CMAKE_ARGS >> .. && cmake -LA ..
@@ -135,7 +135,7 @@ jobs:
     docker:
       - image: << parameters.CONTAINER >>
     steps:
-      - checkout # change this from "checkout" to "*localCheckout" when running CircleCI locally
+      - *localCheckout # change this from "checkout" to "*localCheckout" when running CircleCI locally
       - run:
           name: Configure
           command: mkdir build && cd build && pwd && source ~/.bashrc && scan-build-15 cmake -GNinja ..
@@ -235,12 +235,12 @@ jobs:
 workflows:
   version: 2.1
   build:
-    when:
-      and:
-        - not:
-            equal: [ main, << pipeline.git.branch >> ]
-        - not:
-            matches: { pattern: "^ghactionsonly-.*", value: << pipeline.git.branch >> }
+    # when:
+    #   and:
+    #     - not:
+    #         equal: [ main, << pipeline.git.branch >> ]
+    #     - not:
+    #         matches: { pattern: "^ghactionsonly-.*", value: << pipeline.git.branch >> }
     jobs:
       - stylecheck
       - buildcheck:
@@ -300,9 +300,9 @@ workflows:
           CMAKE_ARGS: -DCMAKE_TOOLCHAIN_FILE=../.CMake/toolchain_x86.cmake
           PYTEST_ARGS: --ignore=tests/test_leaks.py --ignore=tests/test_kat_all.py
 
-  commit-to-main:
-    when:
-      equal: [ main, << pipeline.git.branch >> ]
-    jobs:
-      - trigger-downstream-ci:
-          context: openquantumsafe
+  # commit-to-main:
+  #   when:
+  #     equal: [ main, << pipeline.git.branch >> ]
+  #   jobs:
+  #     - trigger-downstream-ci:
+  #         context: openquantumsafe

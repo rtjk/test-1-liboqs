@@ -134,6 +134,26 @@ cmake_dependent_option(OQS_ENABLE_KEM_ml_kem_768 "" ON "OQS_ENABLE_KEM_ML_KEM" O
 cmake_dependent_option(OQS_ENABLE_KEM_ml_kem_1024_ipd "" ON "OQS_ENABLE_KEM_ML_KEM" OFF)
 cmake_dependent_option(OQS_ENABLE_KEM_ml_kem_1024 "" ON "OQS_ENABLE_KEM_ML_KEM" OFF)
 
+option(OQS_ENABLE_SIG_CROSS "Enable cross algorithm family" ON)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_128_balanced "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_128_fast "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_128_small "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_192_balanced "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_192_fast "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_192_small "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_256_balanced "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_256_fast "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_256_small "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_128_balanced "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_128_fast "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_128_small "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_192_balanced "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_192_fast "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_192_small "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_256_balanced "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_256_fast "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_256_small "" ON "OQS_ENABLE_SIG_CROSS" OFF)
+
 option(OQS_ENABLE_SIG_DILITHIUM "Enable dilithium algorithm family" ON)
 cmake_dependent_option(OQS_ENABLE_SIG_dilithium_2 "" ON "OQS_ENABLE_SIG_DILITHIUM" OFF)
 cmake_dependent_option(OQS_ENABLE_SIG_dilithium_3 "" ON "OQS_ENABLE_SIG_DILITHIUM" OFF)
@@ -328,6 +348,79 @@ if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS AND OQS_USE_BMI2_INSTRUCT
     cmake_dependent_option(OQS_ENABLE_KEM_ml_kem_1024_ipd_avx2 "" ON "OQS_ENABLE_KEM_ml_kem_1024_ipd" OFF)
     cmake_dependent_option(OQS_ENABLE_KEM_ml_kem_1024_avx2 "" ON "OQS_ENABLE_KEM_ml_kem_1024" OFF)
 endif()
+endif()
+
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_128_balanced_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdp_128_balanced" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_128_fast_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdp_128_fast" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_128_small_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdp_128_small" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_192_balanced_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdp_192_balanced" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_192_fast_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdp_192_fast" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_192_small_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdp_192_small" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_256_balanced_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdp_256_balanced" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_256_fast_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdp_256_fast" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdp_256_small_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdp_256_small" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_128_balanced_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdpg_128_balanced" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_128_fast_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdpg_128_fast" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_128_small_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdpg_128_small" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_192_balanced_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdpg_192_balanced" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_192_fast_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdpg_192_fast" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_192_small_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdpg_192_small" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_256_balanced_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdpg_256_balanced" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_256_fast_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdpg_256_fast" OFF)
+endif()
+
+if(OQS_DIST_X86_64_BUILD OR (OQS_USE_AVX2_INSTRUCTIONS))
+    cmake_dependent_option(OQS_ENABLE_SIG_cross_rsdpg_256_small_avx2 "" ON "OQS_ENABLE_SIG_cross_rsdpg_256_small" OFF)
 endif()
 
 

@@ -32,6 +32,186 @@ static inline uint16_t UINT16_TO_BE(const uint16_t x) {
 OQS_STATUS combine_message_signature(uint8_t **signed_msg, size_t *signed_msg_len, const uint8_t *msg, size_t msg_len, const uint8_t *signature, size_t signature_len, const OQS_SIG *sig) {
 	if (0) {
 		///// OQS_COPY_FROM_UPSTREAM_FRAGMENT_COMBINE_MESSAGE_SIGNATURE_START
+	} else if (0 == strcmp(sig->method_name, "cross-rsdp-128-balanced")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdp-128-fast")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdp-128-small")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdp-192-balanced")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdp-192-fast")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdp-192-small")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdp-256-balanced")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdp-256-fast")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdp-256-small")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdpg-128-balanced")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdpg-128-fast")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdpg-128-small")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdpg-192-balanced")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdpg-192-fast")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdpg-192-small")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdpg-256-balanced")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdpg-256-fast")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
+	} else if (0 == strcmp(sig->method_name, "cross-rsdpg-256-small")) {
+		// signed_msg = msg || signature
+		*signed_msg_len = msg_len + signature_len;
+		*signed_msg = malloc(*signed_msg_len);
+		if (*signed_msg == NULL) {
+			return OQS_ERROR;
+		}
+		memcpy(*signed_msg, msg, msg_len);
+		memcpy(*signed_msg + msg_len, signature, signature_len);
+		return OQS_SUCCESS;
 	} else if (0 == strcmp(sig->method_name, "Dilithium2")) {
 		// signed_msg = signature || msg
 		*signed_msg_len = signature_len + msg_len;
