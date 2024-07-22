@@ -13,7 +13,7 @@ OQS_SIG *OQS_SIG_cross_rsdpg_192_small_new(void) {
 		return NULL;
 	}
 	sig->method_name = OQS_SIG_alg_cross_rsdpg_192_small;
-	sig->alg_version = "1.2";
+	sig->alg_version = "1.2 + Keccak_x4 + PQClean fixes";
 
 	sig->claimed_nist_level = 3;
 	sig->euf_cma = true;

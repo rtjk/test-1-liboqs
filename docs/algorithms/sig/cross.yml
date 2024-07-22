@@ -18,11 +18,11 @@ auxiliary-submitters:
 crypto-assumption: hardness of the restricted syndrome decoding problem for random
   linear codes on a finite field
 website: https://www.cross-crypto.com/
-nist-round: 3
-spec-version: 2.1
+nist-round: 1
+spec-version: 1.2 + Keccak_x4 + PQClean fixes
 primary-upstream:
-  source: https://github.com/rtjk/CROSS-PQClean/commit/810e94ec3bb1857854070f9c81a3a1d9622435ac
-  spdx-license-identifier: TODO
+  source: https://github.com/rtjk/CROSS-PQClean/commit/bc4ae80a905118de14341041ae0d12315e4f8bbd
+  spdx-license-identifier: CC0-1.0
 parameter-sets:
 - name: cross-rsdp-128-balanced
   oqs_alg: OQS_SIG_alg_cross_rsdp_128_balanced
@@ -38,8 +38,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -49,8 +49,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdp-128-fast
   oqs_alg: OQS_SIG_alg_cross_rsdp_128_fast
@@ -66,8 +66,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -77,8 +77,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdp-128-small
   oqs_alg: OQS_SIG_alg_cross_rsdp_128_small
@@ -94,8 +94,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -105,8 +105,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdp-192-balanced
   oqs_alg: OQS_SIG_alg_cross_rsdp_192_balanced
@@ -122,8 +122,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -133,8 +133,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdp-192-fast
   oqs_alg: OQS_SIG_alg_cross_rsdp_192_fast
@@ -150,8 +150,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -161,8 +161,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdp-192-small
   oqs_alg: OQS_SIG_alg_cross_rsdp_192_small
@@ -178,8 +178,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -189,8 +189,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdp-256-balanced
   oqs_alg: OQS_SIG_alg_cross_rsdp_256_balanced
@@ -206,8 +206,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -217,8 +217,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdp-256-fast
   oqs_alg: OQS_SIG_alg_cross_rsdp_256_fast
@@ -234,8 +234,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -245,8 +245,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdp-256-small
   oqs_alg: OQS_SIG_alg_cross_rsdp_256_small
@@ -262,8 +262,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -273,8 +273,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdpg-128-balanced
   oqs_alg: OQS_SIG_alg_cross_rsdpg_128_balanced
@@ -290,8 +290,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -301,8 +301,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdpg-128-fast
   oqs_alg: OQS_SIG_alg_cross_rsdpg_128_fast
@@ -318,8 +318,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -329,8 +329,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdpg-128-small
   oqs_alg: OQS_SIG_alg_cross_rsdpg_128_small
@@ -346,8 +346,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -357,8 +357,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdpg-192-balanced
   oqs_alg: OQS_SIG_alg_cross_rsdpg_192_balanced
@@ -374,8 +374,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -385,8 +385,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdpg-192-fast
   oqs_alg: OQS_SIG_alg_cross_rsdpg_192_fast
@@ -402,8 +402,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -413,8 +413,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdpg-192-small
   oqs_alg: OQS_SIG_alg_cross_rsdpg_192_small
@@ -430,8 +430,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -441,8 +441,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdpg-256-balanced
   oqs_alg: OQS_SIG_alg_cross_rsdpg_256_balanced
@@ -458,8 +458,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -469,8 +469,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdpg-256-fast
   oqs_alg: OQS_SIG_alg_cross_rsdpg_256_fast
@@ -486,8 +486,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -497,8 +497,8 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
 - name: cross-rsdpg-256-small
   oqs_alg: OQS_SIG_alg_cross_rsdpg_256_small
@@ -514,8 +514,8 @@ parameter-sets:
     supported-platforms: all
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
   - upstream: primary-upstream
     upstream-id: avx2
@@ -525,6 +525,6 @@ parameter-sets:
       - avx2
     common-crypto:
     - SHA3: liboqs
-    no-secret-dependent-branching-claimed: false
-    no-secret-dependent-branching-checked-by-valgrind: false
+    no-secret-dependent-branching-claimed: true
+    no-secret-dependent-branching-checked-by-valgrind: true
     large-stack-usage: false
