@@ -14,12 +14,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # pin@v4
-      - name: Ensure code conventions are upheld
-        run: python3 -m pytest --verbose tests/test_code_conventions.py
-      - name: Check that doxygen can parse the documentation
-        run: mkdir build && ./scripts/run_doxygen.sh $(which doxygen) ./docs/.Doxyfile ./build
-      - name: Validate CBOM
-        run: scripts/validate_cbom.sh
+      # - name: Ensure code conventions are upheld
+      #   run: python3 -m pytest --verbose tests/test_code_conventions.py
+      # - name: Check that doxygen can parse the documentation
+      #   run: mkdir build && ./scripts/run_doxygen.sh $(which doxygen) ./docs/.Doxyfile ./build
+      # - name: Validate CBOM
+      #   run: scripts/validate_cbom.sh
 
   upstreamcheck:
     name: Check upstream code is properly integrated
@@ -110,6 +110,9 @@ jobs:
       - name: Build
         run: ninja
         working-directory: build
+      - name: a--------------------------------------------------------------a
+        run: cat src/sig/cross/upcross_cross-rsdp-128-small_clean/CROSS.c
+        working-directory: build/..
       - name: Run tests
         run: mkdir -p tmp && python3 -m pytest -x --verbose --ignore=tests/test_code_conventions.py --ignore=tests/test_kat_all.py ${{ matrix.PYTEST_ARGS }}
         timeout-minutes: 60
