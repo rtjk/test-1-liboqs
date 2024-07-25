@@ -49,7 +49,8 @@ jobs:
             runner: oqs-arm64
           - arch: x86_64
             runner: ubuntu-latest
-    runs-on: ${{ matrix.runner }}
+    #runs-on: ${{ matrix.runner }}
+    runs-on: ubuntu-latest
     container: openquantumsafe/ci-ubuntu-focal-${{ matrix.arch }}:latest
     env:
       KEM_NAME: kyber_768
