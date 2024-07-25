@@ -96,10 +96,16 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 		goto err;
 	}
 
-	fprintf(stderr, "\n*** SIGN ***\n");
+	fprintf(stderr, "\n*** SIGN 1 ***\n");
 
 	rc = OQS_SIG_sign(sig, signature, &signature_len, message, message_len, secret_key);
+
+	fprintf(stderr, "\n*** SIGN 2 ***\n");
+
 	OQS_TEST_CT_DECLASSIFY(&rc, sizeof rc);
+
+	fprintf(stderr, "\n*** SIGN 3 ***\n");
+
 	if (rc != OQS_SUCCESS) {
 		fprintf(stderr, "ERROR: OQS_SIG_sign failed\n");
 		goto err;
