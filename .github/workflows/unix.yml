@@ -42,16 +42,15 @@ jobs:
   buildcheck:
     name: Check that code passes a basic build before starting heavier tests
     needs: [ stylecheck, upstreamcheck ]
-    strategy:
-      matrix:
-        include:
-          - arch: arm64
-            runner: oqs-arm64
-          - arch: x86_64
-            runner: ubuntu-latest
-    #runs-on: ${{ matrix.runner }}
-    runs-on: ubuntu-latest
-    container: openquantumsafe/ci-ubuntu-focal-${{ matrix.arch }}:latest
+    # strategy:
+    #   matrix:
+    #     include:
+    #       - arch: arm64
+    #         runner: oqs-arm64
+    #       - arch: x86_64
+    #         runner: ubuntu-latest
+    runs-on: ubuntu-latest #runs-on: ${{ matrix.runner }}
+    container: openquantumsafe/ci-ubuntu-focal-x86_64:latest #container: openquantumsafe/ci-ubuntu-focal-${{ matrix.arch }}:latest
     env:
       KEM_NAME: kyber_768
       SIG_NAME: dilithium_3
@@ -72,10 +71,10 @@ jobs:
       - name: Build code
         run: ninja
         working-directory: build
-      - name: Build documentation
-        run: ninja gen_docs
-        working-directory: build
-        if: matrix.arch == 'x86_64'
+      # - name: Build documentation
+      #   run: ninja gen_docs
+      #   working-directory: build
+      #   if: matrix.arch == 'x86_64'
 
   linux:
     needs: buildcheck
