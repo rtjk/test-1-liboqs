@@ -48,6 +48,9 @@ int PQCLEAN_CROSSRSDP128FAST_CLEAN_crypto_sign(unsigned char *sm,
         size_t *smlen,     // out parameter
         const unsigned char *m, size_t mlen,  // in parameter
         const unsigned char *sk) {                        // in parameter
+
+	fprintf(stderr, "\n### SIGN ###\n");
+
 	/* sign cannot fail */
 	memcpy(sm, m, mlen);
 	PQCLEAN_CROSSRSDP128FAST_CLEAN_CROSS_sign((const prikey_t *) sk,                               // in parameter
@@ -89,6 +92,9 @@ int PQCLEAN_CROSSRSDP128FAST_CLEAN_crypto_sign_signature(unsigned char *sig, siz
         const unsigned char *m, size_t mlen,                  // in parameter
         const unsigned char *sk                                 // in parameter
                                                         ) {
+    
+	fprintf(stderr, "\n### SIGN SIGNATURE ###\n");
+
 	/* sign cannot fail */
 	PQCLEAN_CROSSRSDP128FAST_CLEAN_CROSS_sign((const prikey_t *) sk,                                    // in parameter
 	        (const char *const) m, (const size_t) mlen,              // in parameter
