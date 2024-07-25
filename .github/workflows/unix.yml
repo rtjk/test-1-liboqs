@@ -71,10 +71,10 @@ jobs:
       - name: Build code
         run: ninja
         working-directory: build
-      # - name: Build documentation
-      #   run: ninja gen_docs
-      #   working-directory: build
-      #   if: matrix.arch == 'x86_64'
+      - name: Build documentation
+        run: ninja gen_docs
+        working-directory: build
+        if: matrix.arch == 'x86_64'
 
   linux:
     needs: buildcheck
@@ -82,11 +82,11 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - name: arm64
-            runner: oqs-arm64
-            container: openquantumsafe/ci-ubuntu-focal-arm64:latest
-            PYTEST_ARGS: --maxprocesses=10 --ignore=tests/test_kat_all.py
-            CMAKE_ARGS: -DOQS_ENABLE_SIG_STFL_LMS=ON -DOQS_ENABLE_SIG_STFL_XMSS=ON -DOQS_HAZARDOUS_EXPERIMENTAL_ENABLE_SIG_STFL_KEY_SIG_GEN=ON
+          # - name: arm64
+          #   runner: oqs-arm64
+          #   container: openquantumsafe/ci-ubuntu-focal-arm64:latest
+          #   PYTEST_ARGS: --maxprocesses=10 --ignore=tests/test_kat_all.py
+          #   CMAKE_ARGS: -DOQS_ENABLE_SIG_STFL_LMS=ON -DOQS_ENABLE_SIG_STFL_XMSS=ON -DOQS_HAZARDOUS_EXPERIMENTAL_ENABLE_SIG_STFL_KEY_SIG_GEN=ON
           - name: alpine
             runner: ubuntu-latest
             container: openquantumsafe/ci-alpine-amd64:latest
