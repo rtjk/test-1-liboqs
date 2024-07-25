@@ -44,8 +44,8 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 	//The length of the magic number was chosen to be 31 to break alignment
 	magic_t magic;
 	OQS_randombytes(magic.val, sizeof(magic_t));
-	
-	fprintf(stderr,"\n*** TEST_SIG ***\n");
+
+	fprintf(stderr, "\n*** TEST_SIG ***\n");
 
 	sig = OQS_SIG_new(method_name);
 	if (sig == NULL) {
@@ -87,7 +87,7 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 	OQS_randombytes(message, message_len);
 	OQS_TEST_CT_DECLASSIFY(message, message_len);
 
-	fprintf(stderr,"\n*** KYEPAIR ***\n");
+	fprintf(stderr, "\n*** KYEPAIR ***\n");
 
 	rc = OQS_SIG_keypair(sig, public_key, secret_key);
 	OQS_TEST_CT_DECLASSIFY(&rc, sizeof rc);
@@ -96,7 +96,7 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 		goto err;
 	}
 
-	fprintf(stderr,"\n*** SIGN ***\n");
+	fprintf(stderr, "\n*** SIGN ***\n");
 
 	rc = OQS_SIG_sign(sig, signature, &signature_len, message, message_len, secret_key);
 	OQS_TEST_CT_DECLASSIFY(&rc, sizeof rc);
@@ -105,7 +105,7 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 		goto err;
 	}
 
-	fprintf(stderr,"\n*** VERIFY ***\n");
+	fprintf(stderr, "\n*** VERIFY ***\n");
 
 	OQS_TEST_CT_DECLASSIFY(public_key, sig->length_public_key);
 	OQS_TEST_CT_DECLASSIFY(signature, signature_len);
@@ -116,7 +116,7 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 		goto err;
 	}
 
-	fprintf(stderr,"\n*** REVERIFY ***\n");
+	fprintf(stderr, "\n*** REVERIFY ***\n");
 
 	/* modify the signature to invalidate it */
 	OQS_randombytes(signature, signature_len);
