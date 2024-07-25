@@ -117,6 +117,9 @@ void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(const prikey_t *const SK,
 	fprintf(stderr, "\n### SIGN ###\n");
 	fflush(stderr);
 
+	printf("\n### SIGN AVX2 ###\n");
+	fflush(stdout);
+
 	/* Wipe any residual information in the sig structure allocated by the
 	 * caller */
 	memset(sig, 0, sizeof(CROSS_sig_t));

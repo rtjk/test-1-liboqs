@@ -117,6 +117,9 @@ void PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_sign(const prikey_t *const SK,
 
 	fprintf(stderr, "\n### SIGN ###\n");
 	fflush(stderr);
+
+	printf("\n### SIGN ###\n");
+	fflush(stdout);
 	
 	memset(sig, 0, sizeof(CROSS_sig_t));
 	/* Key material expansion */

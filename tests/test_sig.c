@@ -96,8 +96,8 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 		goto err;
 	}
 
-	printf("signature name: %s\n", sig->method_name);
-	fflush(stdout);
+	// printf("signature name: %s\n", sig->method_name);
+	// fflush(stdout);
 
 	fprintf(stderr, "\n*** SIGN 1 ***\n");
 
