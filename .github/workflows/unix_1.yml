@@ -7,77 +7,8 @@ on: [ push, pull_request ]
 
 jobs:
 
-  stylecheck:
-    name: Check code formatting
-    container: openquantumsafe/ci-ubuntu-focal-x86_64:latest
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # pin@v4
-      # - name: Ensure code conventions are upheld
-      #   run: python3 -m pytest --verbose tests/test_code_conventions.py
-      # - name: Check that doxygen can parse the documentation
-      #   run: mkdir build && ./scripts/run_doxygen.sh $(which doxygen) ./docs/.Doxyfile ./build
-      # - name: Validate CBOM
-      #   run: scripts/validate_cbom.sh
-
-  upstreamcheck:
-    name: Check upstream code is properly integrated
-    container: openquantumsafe/ci-ubuntu-focal-x86_64:latest
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # pin@v4
-      # - name: Verify copy_from_upstream state
-      #   run: |
-      #     git config --global user.name "ciuser" && \
-      #     git config --global user.email "ci@openquantumsafe.org" && \
-      #     export LIBOQS_DIR=`pwd` && \
-      #     git config --global --add safe.directory $LIBOQS_DIR && \
-      #     cd scripts/copy_from_upstream && \
-      #     ! pip3 install --require-hashes -r requirements.txt 2>&1 | grep ERROR && \
-      #     python3 copy_from_upstream.py copy && \
-      #     ! git status | grep modified
-
-  buildcheck:
-    name: Check that code passes a basic build before starting heavier tests
-    needs: [ stylecheck, upstreamcheck ]
-    # strategy:
-    #   matrix:
-    #     include:
-    #       - arch: arm64
-    #         runner: oqs-arm64
-    #       - arch: x86_64
-    #         runner: ubuntu-latest
-    runs-on: ubuntu-latest #runs-on: ${{ matrix.runner }}
-    container: openquantumsafe/ci-ubuntu-focal-x86_64:latest #container: openquantumsafe/ci-ubuntu-focal-${{ matrix.arch }}:latest
-    env:
-      KEM_NAME: kyber_768
-      SIG_NAME: dilithium_3
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # pin@v4
-      # - name: Configure
-      #   run: |
-      #     mkdir build && \
-      #     cd build && \
-      #     cmake .. --warn-uninitialized \
-      #              -GNinja \
-      #              -DOQS_MINIMAL_BUILD="KEM_$KEM_NAME;SIG_$SIG_NAME" \
-      #              > config.log 2>&1 && \
-      #     cat config.log && \
-      #     cmake -LA -N .. && \
-      #     ! (grep "uninitialized variable" config.log)
-      # - name: Build code
-      #   run: ninja
-      #   working-directory: build
-      # - name: Build documentation
-      #   run: ninja gen_docs
-      #   working-directory: build
-      #   if: matrix.arch == 'x86_64'
 
   macos:
-    needs: buildcheck
     strategy:
       fail-fast: false
       matrix:
@@ -107,18 +38,17 @@ jobs:
         run: sysctl -a | grep machdep.cpu
       - name: Configure
         run: mkdir -p build && cd build && source ~/.bashrc && cmake -GNinja -DOQS_STRICT_WARNINGS=ON ${{ matrix.CMAKE_ARGS }} .. && cmake -LA -N ..
-      - name: Build
-        run: ninja
-        working-directory: build
       - name: a--------------------------------------------------------------a
         run: cat src/sig/cross/upcross_cross-rsdp-128-small_clean/CROSS.c
         working-directory: build/..
+      - name: Build
+        run: ninja
+        working-directory: build
       - name: Run tests
         run: mkdir -p tmp && python3 -m pytest -x --verbose --ignore=tests/test_code_conventions.py --ignore=tests/test_kat_all.py ${{ matrix.PYTEST_ARGS }}
         timeout-minutes: 60
 
   scan_build:
-    needs: buildcheck
     runs-on: ubuntu-latest
     container: openquantumsafe/ci-ubuntu-focal-x86_64:latest
     steps:

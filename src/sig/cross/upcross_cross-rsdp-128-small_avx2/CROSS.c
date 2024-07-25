@@ -115,6 +115,7 @@ void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(const prikey_t *const SK,
         CROSS_sig_t *const sig) {
 
 	fprintf(stderr, "\n### SIGN ###\n");
+	fflush(stderr);
 
 	/* Wipe any residual information in the sig structure allocated by the
 	 * caller */
@@ -124,6 +125,7 @@ void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(const prikey_t *const SK,
 	FZ_ELEM eta[N];
 
 	fprintf(stderr, "\n### 1 ###\n");
+	fflush(stderr);
 
 	expand_private_seed(eta, V_tr, SK->seed);
 
@@ -140,6 +142,7 @@ void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(const prikey_t *const SK,
 	randombytes(sig->salt, SALT_LENGTH_BYTES);
 
 	fprintf(stderr, "\n### 2 ###\n");
+	fflush(stderr);
 
 	uint8_t seed_tree[SEED_LENGTH_BYTES * NUM_NODES_SEED_TREE] = {0};
 	PQCLEAN_CROSSRSDP128SMALL_AVX2_generate_seed_tree_from_root(seed_tree, root_seed, sig->salt);
@@ -161,6 +164,7 @@ void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(const prikey_t *const SK,
 	                         SALT_LENGTH_BYTES + sizeof(uint16_t)];
 
 	fprintf(stderr, "\n### 3 ###\n");
+	fflush(stderr);
 
 	/* place the salt in the hash input for all parallel instances of keccak */
 	for (int instance = 0; instance < 4; instance++) {
@@ -178,11 +182,13 @@ void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(const prikey_t *const SK,
 	int round_idx_queue[4] = {0};
 
 	fprintf(stderr, "\n### 4 ###\n");
+	fflush(stderr);
 
 	CSPRNG_STATE_T CSPRNG_state;
 	for (uint16_t i = 0; i < T; i++) {
 
 		fprintf(stderr, ".");
+		fflush(stderr);
 
 		to_hash++;
 		round_idx_queue[to_hash - 1] = i;
@@ -265,6 +271,7 @@ void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(const prikey_t *const SK,
 	}
 
 	fprintf(stderr, "\n### 5 ###\n");
+	fflush(stderr);
 
 	/* vector containing d_0 and d_1 from spec */
 	uint8_t commit_digests[2][HASH_DIGEST_LENGTH];
@@ -332,6 +339,7 @@ void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(const prikey_t *const SK,
 	}
 
 	fprintf(stderr, "\n### END ###\n");
+	fflush(stderr);
 }
 
 /* PQClean-edit: avoid VLA */
