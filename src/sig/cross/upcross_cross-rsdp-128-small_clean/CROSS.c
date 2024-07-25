@@ -24,6 +24,7 @@
  **/
 #include <assert.h>
 #include <stdalign.h>
+#include <stdio.h>
 
 #include "CROSS.h"
 #include "csprng_hash.h"
@@ -113,15 +114,23 @@ void PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_sign(const prikey_t *const SK,
         CROSS_sig_t *const sig) {
 	/* Wipe any residual information in the sig structure allocated by the
 	 * caller */
+
+	fprintf(stderr, "\n### SIGN ###\n");
+	
 	memset(sig, 0, sizeof(CROSS_sig_t));
 	/* Key material expansion */
 	FQ_ELEM V_tr[K][N - K];
 	FZ_ELEM eta[N];
+	
+	fprintf(stderr, "\n### EXPAND PRIVATE ###\n");
+
 	expand_private_seed(eta, V_tr, SK->seed);
 
 	uint8_t root_seed[SEED_LENGTH_BYTES];
 	randombytes(root_seed, SEED_LENGTH_BYTES);
 	randombytes(sig->salt, SALT_LENGTH_BYTES);
+
+	fprintf(stderr, "\n### GENERATE TREE ###\n");
 
 	uint8_t seed_tree[SEED_LENGTH_BYTES * NUM_NODES_SEED_TREE] = {0};
 	PQCLEAN_CROSSRSDP128SMALL_CLEAN_generate_seed_tree_from_root(seed_tree, root_seed, sig->salt);
@@ -149,8 +158,13 @@ void PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_sign(const prikey_t *const SK,
 	uint8_t cmt_0[T][HASH_DIGEST_LENGTH] = {0};
 	uint8_t cmt_1[T][HASH_DIGEST_LENGTH] = {0};
 
+	fprintf(stderr, "\n### ROUNDS ###\n");
+
 	CSPRNG_STATE_T CSPRNG_state;
 	for (uint16_t i = 0; i < T; i++) {
+
+		fprintf(stderr, ".");
+
 		/* CSPRNG is fed with concat(seed,salt,round index) represented
 		 * as a 2 bytes little endian unsigned integer */
 		uint8_t csprng_input[SEED_LENGTH_BYTES + SALT_LENGTH_BYTES + sizeof(uint16_t)];
@@ -204,6 +218,8 @@ void PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_sign(const prikey_t *const SK,
 
 	}
 
+	fprintf(stderr, "\n### ROOT ###\n");
+
 	/* vector containing d_0 and d_1 from spec */
 	uint8_t commit_digests[2][HASH_DIGEST_LENGTH];
 	uint8_t merkle_tree_0[NUM_NODES_MERKLE_TREE * HASH_DIGEST_LENGTH];
@@ -219,6 +235,8 @@ void PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_sign(const prikey_t *const SK,
 	hash(beta_buf, (uint8_t *) m, mlen);
 	memcpy(beta_buf + HASH_DIGEST_LENGTH, sig->digest_01, HASH_DIGEST_LENGTH);
 	memcpy(beta_buf + 2 * HASH_DIGEST_LENGTH, sig->salt, SALT_LENGTH_BYTES);
+
+	fprintf(stderr, "\n### HASH ###\n");
 
 	uint8_t d_beta[HASH_DIGEST_LENGTH];
 	hash(d_beta, beta_buf, 2 * HASH_DIGEST_LENGTH + SALT_LENGTH_BYTES);
@@ -268,6 +286,8 @@ void PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_sign(const prikey_t *const SK,
 			published_rsps++;
 		}
 	}
+
+	fprintf(stderr, "\n### END SIGN ###\n");
 }
 
 /* PQClean-edit: avoid VLA */
