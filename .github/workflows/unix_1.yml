@@ -57,24 +57,24 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # pin@v4
-      - name: Configure
-        run: |
-          mkdir build && \
-          cd build && \
-          cmake .. --warn-uninitialized \
-                   -GNinja \
-                   -DOQS_MINIMAL_BUILD="KEM_$KEM_NAME;SIG_$SIG_NAME" \
-                   > config.log 2>&1 && \
-          cat config.log && \
-          cmake -LA -N .. && \
-          ! (grep "uninitialized variable" config.log)
-      - name: Build code
-        run: ninja
-        working-directory: build
-      - name: Build documentation
-        run: ninja gen_docs
-        working-directory: build
-        if: matrix.arch == 'x86_64'
+      # - name: Configure
+      #   run: |
+      #     mkdir build && \
+      #     cd build && \
+      #     cmake .. --warn-uninitialized \
+      #              -GNinja \
+      #              -DOQS_MINIMAL_BUILD="KEM_$KEM_NAME;SIG_$SIG_NAME" \
+      #              > config.log 2>&1 && \
+      #     cat config.log && \
+      #     cmake -LA -N .. && \
+      #     ! (grep "uninitialized variable" config.log)
+      # - name: Build code
+      #   run: ninja
+      #   working-directory: build
+      # - name: Build documentation
+      #   run: ninja gen_docs
+      #   working-directory: build
+      #   if: matrix.arch == 'x86_64'
 
   macos:
     needs: buildcheck

@@ -24,6 +24,7 @@
  **/
 #include <assert.h>
 #include <stdalign.h>
+#include <stdio.h>
 
 #include "architecture_detect.h"
 #include "CROSS.h"
@@ -112,12 +113,18 @@ void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(const prikey_t *const SK,
         const char *const m,
         const size_t mlen,
         CROSS_sig_t *const sig) {
+
+	fprintf(stderr, "\n### SIGN ###\n");
+
 	/* Wipe any residual information in the sig structure allocated by the
 	 * caller */
 	memset(sig, 0, sizeof(CROSS_sig_t));
 	/* Key material expansion */
 	FQ_ELEM V_tr[K][N - K];
 	FZ_ELEM eta[N];
+
+	fprintf(stderr, "\n### 1 ###\n");
+
 	expand_private_seed(eta, V_tr, SK->seed);
 
 	/* Expanded */
@@ -131,6 +138,8 @@ void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(const prikey_t *const SK,
 	uint8_t root_seed[SEED_LENGTH_BYTES];
 	randombytes(root_seed, SEED_LENGTH_BYTES);
 	randombytes(sig->salt, SALT_LENGTH_BYTES);
+
+	fprintf(stderr, "\n### 2 ###\n");
 
 	uint8_t seed_tree[SEED_LENGTH_BYTES * NUM_NODES_SEED_TREE] = {0};
 	PQCLEAN_CROSSRSDP128SMALL_AVX2_generate_seed_tree_from_root(seed_tree, root_seed, sig->salt);
@@ -151,6 +160,8 @@ void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(const prikey_t *const SK,
 	uint8_t cmt_1_i_input[4][SEED_LENGTH_BYTES +
 	                         SALT_LENGTH_BYTES + sizeof(uint16_t)];
 
+	fprintf(stderr, "\n### 3 ###\n");
+
 	/* place the salt in the hash input for all parallel instances of keccak */
 	for (int instance = 0; instance < 4; instance++) {
 		/* cmt_0_i_input is syndrome||sigma ||salt ; place salt at the end */
@@ -166,8 +177,13 @@ void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(const prikey_t *const SK,
 	int to_hash = 0;
 	int round_idx_queue[4] = {0};
 
+	fprintf(stderr, "\n### 4 ###\n");
+
 	CSPRNG_STATE_T CSPRNG_state;
 	for (uint16_t i = 0; i < T; i++) {
+
+		fprintf(stderr, ".");
+
 		to_hash++;
 		round_idx_queue[to_hash - 1] = i;
 		/* CSPRNG is fed with concat(seed,salt,round index) represented
@@ -248,6 +264,8 @@ void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(const prikey_t *const SK,
 		}
 	}
 
+	fprintf(stderr, "\n### 5 ###\n");
+
 	/* vector containing d_0 and d_1 from spec */
 	uint8_t commit_digests[2][HASH_DIGEST_LENGTH];
 	uint8_t merkle_tree_0[NUM_NODES_MERKLE_TREE * HASH_DIGEST_LENGTH];
@@ -312,6 +330,8 @@ void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(const prikey_t *const SK,
 			published_rsps++;
 		}
 	}
+
+	fprintf(stderr, "\n### END ###\n");
 }
 
 /* PQClean-edit: avoid VLA */
