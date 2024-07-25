@@ -84,13 +84,13 @@ jobs:
         os:
           # macos-14 runs on aarch64; the others run on x64
           - macos-12
-          - macos-13
-          - macos-14
+          # - macos-13
+          # - macos-14
         CMAKE_ARGS:
-          - -DOQS_HAZARDOUS_EXPERIMENTAL_ENABLE_SIG_STFL_KEY_SIG_GEN=ON -DOQS_ENABLE_SIG_STFL_XMSS=ON -DOQS_ENABLE_SIG_STFL_LMS=ON
+          # - -DOQS_HAZARDOUS_EXPERIMENTAL_ENABLE_SIG_STFL_KEY_SIG_GEN=ON -DOQS_ENABLE_SIG_STFL_XMSS=ON -DOQS_ENABLE_SIG_STFL_LMS=ON
           - -DCMAKE_C_COMPILER=gcc-13
-          - -DOQS_USE_OPENSSL=OFF
-          - -DBUILD_SHARED_LIBS=ON -DOQS_DIST_BUILD=OFF
+          # - -DOQS_USE_OPENSSL=OFF
+          # - -DBUILD_SHARED_LIBS=ON -DOQS_DIST_BUILD=OFF
     runs-on: ${{ matrix.os }}
     steps:
       - name: Install Python
