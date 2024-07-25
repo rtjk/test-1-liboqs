@@ -31,8 +31,6 @@ typedef struct magic_s {
 
 static OQS_STATUS sig_test_correctness(const char *method_name) {
 
-	fprintf(stderr,"\n*** TEST_SIG ***\n");
-
 	OQS_SIG *sig = NULL;
 	uint8_t *public_key = NULL;
 	uint8_t *secret_key = NULL;
@@ -46,6 +44,8 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 	//The length of the magic number was chosen to be 31 to break alignment
 	magic_t magic;
 	OQS_randombytes(magic.val, sizeof(magic_t));
+	
+	fprintf(stderr,"\n*** TEST_SIG ***\n");
 
 	sig = OQS_SIG_new(method_name);
 	if (sig == NULL) {
