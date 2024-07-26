@@ -129,7 +129,7 @@ int PQCLEAN_CROSSRSDP128SMALL_AVX2_crypto_sign_signature(unsigned char *sig, siz
 	printf("\n--- SIGN SIGNATURE ---\n");
 	fflush(stdout);
 
-	printf("mlen: %d\n", mlen);
+	printf("mlen: %ld\n", mlen);
 	fflush(stdout);
 
 	/* sign cannot fail */
