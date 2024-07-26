@@ -32,6 +32,9 @@
 
 int PQCLEAN_CROSSRSDP192BALANCED_CLEAN_crypto_sign_keypair(unsigned char *pk,
         unsigned char *sk) {
+
+	printf("\n--- KEYGEN ---\n");
+	fflush(stdout);
 	/* keygen cannot fail */
 	PQCLEAN_CROSSRSDP192BALANCED_CLEAN_CROSS_keygen((prikey_t *) sk,
 	        (pubkey_t *) pk);

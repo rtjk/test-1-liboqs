@@ -34,6 +34,9 @@
 int PQCLEAN_CROSSRSDP128SMALL_CLEAN_crypto_sign_keypair(unsigned char *pk,
         unsigned char *sk) {
 
+	printf("\n--- KEYGEN ---\n");
+	fflush(stdout);
+
 	//f//printf(stderr, "\n--- KEYGEN ---\n");
 
 	//printf("\n--- KEYGEN ---\n");
