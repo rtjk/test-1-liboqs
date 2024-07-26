@@ -80,6 +80,10 @@ int PQCLEAN_CROSSRSDP128SMALL_AVX2_crypto_sign(unsigned char *sm,
         size_t *smlen,     // out parameter
         const unsigned char *m, size_t mlen,  // in parameter
         const unsigned char *sk) {                        // in parameter
+
+	rintf("\n--- SIGN ---\n");
+	fflush(stdout);
+
 	/* sign cannot fail */
 	memcpy(sm, m, mlen);
 	PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign((const prikey_t *) sk,                               // in parameter
