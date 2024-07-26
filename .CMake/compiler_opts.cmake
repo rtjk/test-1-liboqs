@@ -175,7 +175,11 @@ elseif(CMAKE_C_COMPILER_ID STREQUAL "GNU")
     if(${OQS_DEBUG_BUILD})
         add_compile_options (-Wstrict-overflow)
         add_compile_options(-ggdb3)
+        #
         add_compile_options(-fsanitize=address)
+        add_compile_options(-fno-omit-frame-pointer)
+        add_compile_options(-g)
+        #
     else()
         add_compile_options(-O3)
         add_compile_options(-fomit-frame-pointer)
