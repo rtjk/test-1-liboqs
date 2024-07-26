@@ -179,7 +179,6 @@ elseif(CMAKE_C_COMPILER_ID STREQUAL "GNU")
         add_compile_options(-fsanitize=address)
         add_compile_options(-fno-omit-frame-pointer)
         add_compile_options(-g)
-        add_compile_options(--stack,10485760)
         #
     else()
         add_compile_options(-O3)
