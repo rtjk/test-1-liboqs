@@ -18,9 +18,8 @@ jobs:
           # - macos-13
           # - macos-14
         CMAKE_ARGS:
-          - -CMAKE_BUILD_TYPE="Debug" -DOQS_MINIMAL_BUILD="KEM_kyber_768;SIG_cross_rsdp_128_small;SIG_cross_rsdp_128_small_avx2"
+          - -DCMAKE_C_COMPILER=gcc-13 -DCMAKE_BUILD_TYPE="Debug" -DOQS_MINIMAL_BUILD="KEM_kyber_768;SIG_cross_rsdp_128_small;SIG_cross_rsdp_128_small_avx2"
           # - -DOQS_HAZARDOUS_EXPERIMENTAL_ENABLE_SIG_STFL_KEY_SIG_GEN=ON -DOQS_ENABLE_SIG_STFL_XMSS=ON -DOQS_ENABLE_SIG_STFL_LMS=ON
-          # - -DCMAKE_C_COMPILER=gcc-13 -CMAKE_BUILD_TYPE="Debug" -DOQS_MINIMAL_BUILD="KEM_kyber_768;SIG_cross_rsdp_128_small;SIG_cross_rsdp_128_small_avx2"
           # - -DOQS_USE_OPENSSL=OFF
           # - -DBUILD_SHARED_LIBS=ON -DOQS_DIST_BUILD=OFF
     runs-on: ${{ matrix.os }}
