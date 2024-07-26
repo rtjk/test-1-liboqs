@@ -31,7 +31,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # pin@v4
       - name: Install dependencies
-        run: env HOMEBREW_NO_AUTO_UPDATE=1 brew install ninja && pip3 install --require-hashes --break-system-packages -r .github/workflows/requirements.txt
+        run: env HOMEBREW_NO_AUTO_UPDATE=1 brew install valgrind ninja && pip3 install --require-hashes --break-system-packages -r .github/workflows/requirements.txt
       - name: Patch GCC
         run: env HOMEBREW_NO_AUTO_UPDATE=1 brew uninstall --ignore-dependencies gcc@13 && wget https://raw.githubusercontent.com/Homebrew/homebrew-core/eb6dd225d093b66054e18e07d56509cf670793b1/Formula/g/gcc%4013.rb && env HOMEBREW_NO_AUTO_UPDATE=1 brew install --ignore-dependencies --formula gcc@13.rb
       - name: Get system information
