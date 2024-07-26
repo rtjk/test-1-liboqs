@@ -72,10 +72,10 @@ void expand_private_seed(FZ_ELEM eta[N],
 void PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_keygen(prikey_t *SK,
         pubkey_t *PK) {
 
-	fprintf(stderr, "\n### KEYGEN ###\n");
+	//f//printf(stderr, "\n### KEYGEN ###\n");
 
-	printf("\n### KEYGEN ###\n");
-	fflush(stdout);
+	//printf("\n### KEYGEN ###\n");
+	//fflush(stdout);
 
 	/* generation of random material for public and private key */
 	randombytes(SK->seed, KEYPAIR_SEED_LENGTH_BYTES);
@@ -121,19 +121,19 @@ void PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_sign(const prikey_t *const SK,
 	/* Wipe any residual information in the sig structure allocated by the
 	 * caller */
 
-	fprintf(stderr, "\n### SIGN ###\n");
-	fflush(stderr);
+	//f//printf(stderr, "\n### SIGN ###\n");
+	//fflush(stderr);
 
-	printf("\n### SIGN ###\n");
-	fflush(stdout);
+	//printf("\n### SIGN ###\n");
+	//fflush(stdout);
 	
 	memset(sig, 0, sizeof(CROSS_sig_t));
 	/* Key material expansion */
 	FQ_ELEM V_tr[K][N - K];
 	FZ_ELEM eta[N];
 	
-	fprintf(stderr, "\n### EXPAND PRIVATE ###\n");
-	fflush(stderr);
+	//f//printf(stderr, "\n### EXPAND PRIVATE ###\n");
+	//fflush(stderr);
 
 	expand_private_seed(eta, V_tr, SK->seed);
 
@@ -141,8 +141,8 @@ void PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_sign(const prikey_t *const SK,
 	randombytes(root_seed, SEED_LENGTH_BYTES);
 	randombytes(sig->salt, SALT_LENGTH_BYTES);
 
-	fprintf(stderr, "\n### GENERATE TREE ###\n");
-	fflush(stderr);
+	//f//printf(stderr, "\n### GENERATE TREE ###\n");
+	//fflush(stderr);
 
 	uint8_t seed_tree[SEED_LENGTH_BYTES * NUM_NODES_SEED_TREE] = {0};
 	PQCLEAN_CROSSRSDP128SMALL_CLEAN_generate_seed_tree_from_root(seed_tree, root_seed, sig->salt);
@@ -170,14 +170,14 @@ void PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_sign(const prikey_t *const SK,
 	uint8_t cmt_0[T][HASH_DIGEST_LENGTH] = {0};
 	uint8_t cmt_1[T][HASH_DIGEST_LENGTH] = {0};
 
-	fprintf(stderr, "\n### ROUNDS ###\n");
-	fflush(stderr);
+	//f//printf(stderr, "\n### ROUNDS ###\n");
+	//fflush(stderr);
 
 	CSPRNG_STATE_T CSPRNG_state;
 	for (uint16_t i = 0; i < T; i++) {
 
-		fprintf(stderr, ".");
-		fflush(stderr);
+		//f//printf(stderr, ".");
+		//fflush(stderr);
 
 		/* CSPRNG is fed with concat(seed,salt,round index) represented
 		 * as a 2 bytes little endian unsigned integer */
@@ -232,8 +232,8 @@ void PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_sign(const prikey_t *const SK,
 
 	}
 
-	fprintf(stderr, "\n### ROOT ###\n");
-	fflush(stderr);
+	//f//printf(stderr, "\n### ROOT ###\n");
+	//fflush(stderr);
 
 	/* vector containing d_0 and d_1 from spec */
 	uint8_t commit_digests[2][HASH_DIGEST_LENGTH];
@@ -251,8 +251,8 @@ void PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_sign(const prikey_t *const SK,
 	memcpy(beta_buf + HASH_DIGEST_LENGTH, sig->digest_01, HASH_DIGEST_LENGTH);
 	memcpy(beta_buf + 2 * HASH_DIGEST_LENGTH, sig->salt, SALT_LENGTH_BYTES);
 
-	fprintf(stderr, "\n### HASH ###\n");
-	fflush(stderr);
+	//f//printf(stderr, "\n### HASH ###\n");
+	//fflush(stderr);
 
 	uint8_t d_beta[HASH_DIGEST_LENGTH];
 	hash(d_beta, beta_buf, 2 * HASH_DIGEST_LENGTH + SALT_LENGTH_BYTES);
@@ -303,8 +303,8 @@ void PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_sign(const prikey_t *const SK,
 		}
 	}
 
-	fprintf(stderr, "\n### END SIGN ###\n");
-	fflush(stderr);
+	//f//printf(stderr, "\n### END SIGN ###\n");
+	//fflush(stderr);
 }
 
 /* PQClean-edit: avoid VLA */

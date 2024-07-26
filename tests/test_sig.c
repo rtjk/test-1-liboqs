@@ -102,10 +102,10 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 	fprintf(stderr, "\n*** SIGN 1 ***\n");
 
 	OQS_SIG_sign(sig, signature, &signature_len, message, message_len, secret_key);
-	
-	rc = OQS_SIG_sign(sig, signature, &signature_len, message, message_len, secret_key);
 
 	fprintf(stderr, "\n*** SIGN 2 ***\n");
+	
+	rc = OQS_SIG_sign(sig, signature, &signature_len, message, message_len, secret_key);
 
 	OQS_TEST_CT_DECLASSIFY(&rc, sizeof rc);
 
