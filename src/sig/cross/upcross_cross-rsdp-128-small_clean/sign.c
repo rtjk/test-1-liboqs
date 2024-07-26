@@ -35,11 +35,63 @@ int PQCLEAN_CROSSRSDP128SMALL_CLEAN_crypto_sign_keypair(unsigned char *pk,
         unsigned char *sk) {
 
 	printf("\n--- KEYGEN ---\n");
+/* Variant */
+#if defined(RSDP)
+printf("\n--- RSDP ---\n");
+#else
+printf("\n--- RSDPg ---\n");
+#endif
+/* Category */
+#ifndef CATEGORY_1
+printf("\n--- NO1 ---\n");
+#endif
+#ifndef CATEGORY_3
+printf("\n--- NO3 ---\n");
+#endif
+#ifndef CATEGORY_5
+printf("\n--- NO5 ---\n");
+#endif
+/* Target */
+#ifndef BALANCED
+printf("\n--- NOB ---\n");
+#endif
+#ifndef SPEED
+printf("\n--- NOS ---\n");
+#endif
+#ifndef SIG_SIZE
+printf("\n--- NOF ---\n");
+#endif
 	fflush(stdout);
 
 	//f//printf(stderr, "\n--- KEYGEN ---\n");
 
 	//printf("\n--- KEYGEN ---\n");
+/* Variant */
+#if defined(RSDP)
+printf("\n--- RSDP ---\n");
+#else
+printf("\n--- RSDPg ---\n");
+#endif
+/* Category */
+#ifndef CATEGORY_1
+printf("\n--- NO1 ---\n");
+#endif
+#ifndef CATEGORY_3
+printf("\n--- NO3 ---\n");
+#endif
+#ifndef CATEGORY_5
+printf("\n--- NO5 ---\n");
+#endif
+/* Target */
+#ifndef BALANCED
+printf("\n--- NOB ---\n");
+#endif
+#ifndef SPEED
+printf("\n--- NOS ---\n");
+#endif
+#ifndef SIG_SIZE
+printf("\n--- NOF ---\n");
+#endif
 	//fflush(stdout);
 
 	/* keygen cannot fail */
