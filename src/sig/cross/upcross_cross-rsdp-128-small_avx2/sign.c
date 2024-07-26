@@ -129,10 +129,13 @@ int PQCLEAN_CROSSRSDP128SMALL_AVX2_crypto_sign_signature(unsigned char *sig, siz
 	printf("\n--- SIGN SIGNATURE ---\n");
 	fflush(stdout);
 
+	print("mlen: %d\n", mlen);
+	fflush(stdout);
+
 	/* sign cannot fail */
-	PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign((const prikey_t *) sk,                                    // in parameter
-	        (const char *const) m, (const size_t) mlen,              // in parameter
-	        (CROSS_sig_t *) sig);                                            // out parameter
+	PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign((const prikey_t *) sk,    
+	        (const char *const) m, (const size_t) mlen,        
+	        (CROSS_sig_t *) sig);   
 	*siglen = (size_t) sizeof(CROSS_sig_t);
 
 	return 0;  // NIST convention: 0 == zero errors
