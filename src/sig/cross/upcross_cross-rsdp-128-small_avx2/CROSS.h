@@ -64,8 +64,8 @@ void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_keygen(prikey_t *SK,
         pubkey_t *PK);
 
 /* sign cannot fail */
-void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(const prikey_t *SK,
-        const char *m,
+void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(prikey_t *SK,
+        char *m,
         size_t mlen,
         CROSS_sig_t *sig);
 

@@ -113,10 +113,10 @@ void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_keygen(prikey_t *SK,
 }
 
 /* sign cannot fail */
-void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(const prikey_t *const SK,
-        const char *const m,
-        const size_t mlen,
-        CROSS_sig_t *const sig) {
+void PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(prikey_t * SK,
+        char *m,
+        size_t mlen,
+        CROSS_sig_t * sig) {
 
 	printf("\n@@@ SIGN 1 @@@\n");
 	fflush(stdout);
