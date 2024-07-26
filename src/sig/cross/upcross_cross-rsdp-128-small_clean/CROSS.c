@@ -71,6 +71,10 @@ void expand_private_seed(FZ_ELEM eta[N],
 
 void PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_keygen(prikey_t *SK,
         pubkey_t *PK) {
+
+	printf("\n### KEYGEN ###\n");
+	fflush(stdout);
+
 	/* generation of random material for public and private key */
 	randombytes(SK->seed, KEYPAIR_SEED_LENGTH_BYTES);
 	uint8_t seede_seed_pub[2][KEYPAIR_SEED_LENGTH_BYTES];
