@@ -139,7 +139,7 @@ int PQCLEAN_CROSSRSDP128SMALL_AVX2_crypto_sign_signature(unsigned char *sig, siz
     printf("\n"); 
 
 	printf("sk: ");
-	for (int i = 0; i < PQCLEAN_CROSSRSDP128SMALL_AVX2_CRYPTO_SECRETKEYBYTES; ++i) {
+	for (size_t i = 0; i < PQCLEAN_CROSSRSDP128SMALL_AVX2_CRYPTO_SECRETKEYBYTES; ++i) {
 		printf("%c", sk[i]);
 	}
 	printf("\n");
