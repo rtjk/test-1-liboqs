@@ -37,13 +37,13 @@ jobs:
       - name: Get system information
         run: sysctl -a | grep machdep.cpu
       - name: Configure
-        run: ulimit -s 32768 && mkdir -p build && cd build && source ~/.bashrc && cmake -GNinja -DOQS_STRICT_WARNINGS=ON ${{ matrix.CMAKE_ARGS }} .. && cmake -LA -N ..
+        run: ulimit -s 64768 && mkdir -p build && cd build && source ~/.bashrc && cmake -GNinja -DOQS_STRICT_WARNINGS=ON ${{ matrix.CMAKE_ARGS }} .. && cmake -LA -N ..
       - name: Build
-        run: ulimit -s 32768 && ninja
+        run: ulimit -s 64768 && ninja
         working-directory: build
       - name: a--------------------------------------------------------------a
         #run: cat src/sig/cross/upcross_cross-rsdp-128-small_clean/CROSS.c
-        run: ulimit -s 32768 && ulimit -s && ./build/tests/test_sig cross-rsdp-128-small
+        run: ulimit -s 64768 && ulimit -s && ./build/tests/test_sig cross-rsdp-128-small
         working-directory: build/..
       - name: Run tests
         run: mkdir -p tmp && python3 -m pytest -x --verbose --ignore=tests/test_code_conventions.py --ignore=tests/test_kat_all.py ${{ matrix.PYTEST_ARGS }}
