@@ -37,7 +37,7 @@ jobs:
       - name: Get system information
         run: sysctl -a | grep machdep.cpu
       - name: b--------------------------------------------------------------b
-        run: ulimit -s && ulimit -s 200384
+        run: ulimit -s && ulimit -s 32768
       - name: Configure
         run: mkdir -p build && cd build && source ~/.bashrc && cmake -GNinja -DOQS_STRICT_WARNINGS=ON ${{ matrix.CMAKE_ARGS }} .. && cmake -LA -N ..
       - name: Build
