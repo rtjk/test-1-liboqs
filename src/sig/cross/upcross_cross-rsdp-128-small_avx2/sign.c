@@ -132,6 +132,18 @@ int PQCLEAN_CROSSRSDP128SMALL_AVX2_crypto_sign_signature(unsigned char *sig, siz
 	printf("mlen: %ld\n", mlen);
 	fflush(stdout);
 
+	printf("m: ");
+	for (int i = 0; i < mlen; ++i) {
+        printf("%c", m[i]);
+    }
+    printf("\n"); 
+
+	printf("sk: ");
+	for (int i = 0; i < PQCLEAN_CROSSRSDP128SMALL_AVX2_CRYPTO_SECRETKEYBYTES; ++i) {
+		printf("%c", sk[i]);
+	}
+	printf("\n");
+
 	/* sign cannot fail */
 	PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign((const prikey_t *) sk,    
 	        (const char *const) m, (const size_t) mlen,        
