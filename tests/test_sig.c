@@ -57,9 +57,9 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 	printf("Sample computation for signature %s\n", sig->method_name);
 	printf("================================================================================\n");
 
-	for(int i=0; i<1000; i++){
-		fflush(stdout);
-	}
+	// for(int i=0; i<1000; i++){
+	// 	fflush(stdout);
+	// }
 
 	public_key = malloc(sig->length_public_key + 2 * sizeof(magic_t));
 	secret_key = malloc(sig->length_secret_key + 2 * sizeof(magic_t));
