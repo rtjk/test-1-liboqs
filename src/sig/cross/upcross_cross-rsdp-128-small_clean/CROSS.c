@@ -74,8 +74,8 @@ void PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_keygen(prikey_t *SK,
 
 	//f//printf(stderr, "\n### KEYGEN ###\n");
 
-	//printf("\n### KEYGEN ###\n");
-	//fflush(stdout);
+	printf("\n### KEYGEN ###\n");
+	fflush(stdout);
 
 	/* generation of random material for public and private key */
 	randombytes(SK->seed, KEYPAIR_SEED_LENGTH_BYTES);

@@ -45,11 +45,11 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 	magic_t magic;
 	OQS_randombytes(magic.val, sizeof(magic_t));
 
-	fprintf(stderr, "\n*** TEST_SIG ***\n");
+	//fprintf(stderr, "\n*** TEST_SIG ***\n");
 
 	sig = OQS_SIG_new(method_name);
 	if (sig == NULL) {
-		fprintf(stderr, "ERROR: OQS_SIG_new failed\n");
+		//fprintf(stderr, "ERROR: OQS_SIG_new failed\n");
 		goto err;
 	}
 
@@ -63,7 +63,7 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 	signature = malloc(sig->length_signature + 2 * sizeof(magic_t));
 
 	if ((public_key == NULL) || (secret_key == NULL) || (message == NULL) || (signature == NULL)) {
-		fprintf(stderr, "ERROR: malloc failed\n");
+		//fprintf(stderr, "ERROR: malloc failed\n");
 		goto err;
 	}
 
@@ -87,47 +87,47 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 	OQS_randombytes(message, message_len);
 	OQS_TEST_CT_DECLASSIFY(message, message_len);
 
-	fprintf(stderr, "\n*** KYEPAIR ***\n");
+	//fprintf(stderr, "\n*** KYEPAIR ***\n");
 
 	rc = OQS_SIG_keypair(sig, public_key, secret_key);
 	OQS_TEST_CT_DECLASSIFY(&rc, sizeof rc);
 	if (rc != OQS_SUCCESS) {
-		fprintf(stderr, "ERROR: OQS_SIG_keypair failed\n");
+		//fprintf(stderr, "ERROR: OQS_SIG_keypair failed\n");
 		goto err;
 	}
 
 	// printf("signature name: %s\n", sig->method_name);
 	// fflush(stdout);
 
-	fprintf(stderr, "\n*** SIGN 1 ***\n");
+	//fprintf(stderr, "\n*** SIGN 1 ***\n");
 
 	OQS_SIG_sign(sig, signature, &signature_len, message, message_len, secret_key);
 
-	fprintf(stderr, "\n*** SIGN 2 ***\n");
+	//fprintf(stderr, "\n*** SIGN 2 ***\n");
 	
 	rc = OQS_SIG_sign(sig, signature, &signature_len, message, message_len, secret_key);
 
 	OQS_TEST_CT_DECLASSIFY(&rc, sizeof rc);
 
-	fprintf(stderr, "\n*** SIGN 3 ***\n");
+	//fprintf(stderr, "\n*** SIGN 3 ***\n");
 
 	if (rc != OQS_SUCCESS) {
-		fprintf(stderr, "ERROR: OQS_SIG_sign failed\n");
+		//fprintf(stderr, "ERROR: OQS_SIG_sign failed\n");
 		goto err;
 	}
 
-	fprintf(stderr, "\n*** VERIFY ***\n");
+	//fprintf(stderr, "\n*** VERIFY ***\n");
 
 	OQS_TEST_CT_DECLASSIFY(public_key, sig->length_public_key);
 	OQS_TEST_CT_DECLASSIFY(signature, signature_len);
 	rc = OQS_SIG_verify(sig, message, message_len, signature, signature_len, public_key);
 	OQS_TEST_CT_DECLASSIFY(&rc, sizeof rc);
 	if (rc != OQS_SUCCESS) {
-		fprintf(stderr, "ERROR: OQS_SIG_verify failed\n");
+		//fprintf(stderr, "ERROR: OQS_SIG_verify failed\n");
 		goto err;
 	}
 
-	fprintf(stderr, "\n*** REVERIFY ***\n");
+	//fprintf(stderr, "\n*** REVERIFY ***\n");
 
 	/* modify the signature to invalidate it */
 	OQS_randombytes(signature, signature_len);
@@ -135,7 +135,7 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 	rc = OQS_SIG_verify(sig, message, message_len, signature, signature_len, public_key);
 	OQS_TEST_CT_DECLASSIFY(&rc, sizeof rc);
 	if (rc != OQS_ERROR) {
-		fprintf(stderr, "ERROR: OQS_SIG_verify should have failed!\n");
+		//fprintf(stderr, "ERROR: OQS_SIG_verify should have failed!\n");
 		goto err;
 	}
 
@@ -150,7 +150,7 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 	rv |= memcmp(message - sizeof(magic_t), magic.val, sizeof(magic_t));
 	rv |= memcmp(signature - sizeof(magic_t), magic.val, sizeof(magic_t));
 	if (rv) {
-		fprintf(stderr, "ERROR: Magic numbers do not match\n");
+		//fprintf(stderr, "ERROR: Magic numbers do not match\n");
 		goto err;
 	}
 #endif
@@ -214,15 +214,15 @@ int main(int argc, char **argv) {
 	printf("Testing signature algorithms using liboqs version %s\n", OQS_version());
 
 	if (argc != 2) {
-		fprintf(stderr, "Usage: test_sig algname\n");
-		fprintf(stderr, "  algname: ");
+		//fprintf(stderr, "Usage: test_sig algname\n");
+		//fprintf(stderr, "  algname: ");
 		for (size_t i = 0; i < OQS_SIG_algs_length; i++) {
 			if (i > 0) {
-				fprintf(stderr, ", ");
+				//fprintf(stderr, ", ");
 			}
-			fprintf(stderr, "%s", OQS_SIG_alg_identifier(i));
+			//fprintf(stderr, "%s", OQS_SIG_alg_identifier(i));
 		}
-		fprintf(stderr, "\n");
+		//fprintf(stderr, "\n");
 		OQS_destroy();
 		return EXIT_FAILURE;
 	}
@@ -260,7 +260,7 @@ int main(int argc, char **argv) {
 		td.alg_name = alg_name;
 		int trc = pthread_create(&thread, NULL, test_wrapper, &td);
 		if (trc) {
-			fprintf(stderr, "ERROR: Creating pthread\n");
+			//fprintf(stderr, "ERROR: Creating pthread\n");
 			OQS_destroy();
 			return EXIT_FAILURE;
 		}
