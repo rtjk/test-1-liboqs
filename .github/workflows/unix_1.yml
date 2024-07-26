@@ -19,7 +19,8 @@ jobs:
           # - macos-14
         CMAKE_ARGS:
           # - -DOQS_HAZARDOUS_EXPERIMENTAL_ENABLE_SIG_STFL_KEY_SIG_GEN=ON -DOQS_ENABLE_SIG_STFL_XMSS=ON -DOQS_ENABLE_SIG_STFL_LMS=ON
-          - -DCMAKE_C_COMPILER=gcc-13 -DOQS_MINIMAL_BUILD="KEM_kyber_768;SIG_cross_rsdp_128_small;SIG_cross_rsdp_128_small_avx2"
+          - -DCMAKE_C_COMPILER=gcc-13 -CMAKE_BUILD_TYPE="Debug" -DOQS_MINIMAL_BUILD="KEM_kyber_768;SIG_cross_rsdp_128_small;SIG_cross_rsdp_128_small_avx2"
+          #-DOQS_STRICT_WARNINGS=ON
           # - -DOQS_USE_OPENSSL=OFF
           # - -DBUILD_SHARED_LIBS=ON -DOQS_DIST_BUILD=OFF
     runs-on: ${{ matrix.os }}
@@ -37,7 +38,7 @@ jobs:
       - name: Get system information
         run: sysctl -a | grep machdep.cpu
       - name: Configure
-        run: mkdir -p build && cd build && source ~/.bashrc && cmake -GNinja -CMAKE_BUILD_TYPE=Debug -DOQS_STRICT_WARNINGS=ON ${{ matrix.CMAKE_ARGS }} .. && cmake -LA -N ..
+        run: mkdir -p build && cd build && source ~/.bashrc && cmake -GNinja ${{ matrix.CMAKE_ARGS }} .. && cmake -LA -N ..
       - name: Build
         run: ninja
         working-directory: build
