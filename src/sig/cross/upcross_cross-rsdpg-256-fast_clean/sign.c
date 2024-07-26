@@ -27,6 +27,7 @@
 #include "CROSS.h"
 #include "parameters.h"
 #include <stddef.h>  //  size_t
+#include <stdio.h>
 #include <string.h>  // memcpy
 /*----------------------------------------------------------------------------*/
 
