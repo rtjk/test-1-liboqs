@@ -56,10 +56,10 @@ printf("\n--- NO5 ---\n");
 printf("\n--- NOB ---\n");
 #endif
 #ifndef SPEED
-printf("\n--- NOS ---\n");
+printf("\n--- NOF ---\n");
 #endif
 #ifndef SIG_SIZE
-printf("\n--- NOF ---\n");
+printf("\n--- NOS ---\n");
 #endif
 	fflush(stdout);
 	/* keygen cannot fail */
