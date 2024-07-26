@@ -45,7 +45,7 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 	magic_t magic;
 	OQS_randombytes(magic.val, sizeof(magic_t));
 
-	fprintf(stderr, "\n*** TEST_SIG ***\n");
+	//fprintf(stderr, "\n*** TEST_SIG ***\n");
 
 	sig = OQS_SIG_new(method_name);
 	if (sig == NULL) {
@@ -91,7 +91,7 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 	OQS_randombytes(message, message_len);
 	OQS_TEST_CT_DECLASSIFY(message, message_len);
 
-	fprintf(stderr, "\n*** KYEPAIR ***\n");
+	//fprintf(stderr, "\n*** KYEPAIR ***\n");
 
 	rc = OQS_SIG_keypair(sig, public_key, secret_key);
 	OQS_TEST_CT_DECLASSIFY(&rc, sizeof rc);
@@ -103,20 +103,23 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 	// printf("signature name: %s\n", sig->method_name);
 	// fflush(stdout);
 
-	fprintf(stderr, "\n*** SIGN 1 ***\n");
+	//fprintf(stderr, "\n*** SIGN 1 ***\n");
 
-	printf("aaaa\n");
+	printf("\n*** BEFORE SIGN ***\n");
 	fflush(stdout);
 
 	OQS_SIG_sign(sig, signature, &signature_len, message, message_len, secret_key);
 
-	fprintf(stderr, "\n*** SIGN 2 ***\n");
+	printf("\n*** AFTER SIGN ***\n");
+	fflush(stdout);
+
+	//fprintf(stderr, "\n*** SIGN 2 ***\n");
 	
 	rc = OQS_SIG_sign(sig, signature, &signature_len, message, message_len, secret_key);
 
 	OQS_TEST_CT_DECLASSIFY(&rc, sizeof rc);
 
-	fprintf(stderr, "\n*** SIGN 3 ***\n");
+	//fprintf(stderr, "\n*** SIGN 3 ***\n");
 
 	if (rc != OQS_SUCCESS) {
 		fprintf(stderr, "ERROR: OQS_SIG_sign failed\n");
@@ -134,7 +137,7 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 		goto err;
 	}
 
-	fprintf(stderr, "\n*** REVERIFY ***\n");
+	//fprintf(stderr, "\n*** REVERIFY ***\n");
 
 	/* modify the signature to invalidate it */
 	OQS_randombytes(signature, signature_len);
