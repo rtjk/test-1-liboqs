@@ -86,8 +86,8 @@ int PQCLEAN_CROSSRSDP128SMALL_AVX2_crypto_sign(unsigned char *sm,
 
 	/* sign cannot fail */
 	memcpy(sm, m, mlen);
-	PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign((const prikey_t *) sk,                               // in parameter
-	        (const char *const) m, (const size_t) mlen,         // in parameter
+	PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(( prikey_t *) sk,                               // in parameter
+	        (char *) m, ( size_t) mlen,         // in parameter
 	        (CROSS_sig_t *) (sm + mlen));                               // out parameter
 	*smlen = mlen + (size_t) sizeof(CROSS_sig_t);
 
@@ -162,13 +162,13 @@ int PQCLEAN_CROSSRSDP128SMALL_AVX2_crypto_sign_signature(unsigned char *sig, siz
 
 	printf("sizeof(CROSS_sig_t): %ld\n", sizeof(CROSS_sig_t));
 	fflush(stdout);
-	
+
 	printf("\n--- CALL CROSS_SIGN ---\n");
 	fflush(stdout);
 
 	/* sign cannot fail */
-	PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign((const prikey_t *) sk,    
-	        (const char *const) m, (const size_t) mlen,        
+	PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(( prikey_t *) sk,    
+	        (char *) m, ( size_t) mlen,        
 	        (CROSS_sig_t *) sig);   
 
 	printf("\n--- EXIT CROSS_SIGN ---\n");
