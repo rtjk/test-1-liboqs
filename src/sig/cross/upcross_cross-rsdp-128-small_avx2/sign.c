@@ -34,6 +34,8 @@
 int PQCLEAN_CROSSRSDP128SMALL_AVX2_crypto_sign_keypair(unsigned char *pk,
         unsigned char *sk) {
 
+	printf("\n--- TEST PQCLEAN_CROSSRSDP128SMALL_AVX2_crypto_sign_keypair ---\n");
+
 	printf("\n--- KEYGEN ---\n");
 /* Variant */
 #if defined(RSDP)

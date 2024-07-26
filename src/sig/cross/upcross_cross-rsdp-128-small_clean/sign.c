@@ -34,7 +34,7 @@
 int PQCLEAN_CROSSRSDP128SMALL_CLEAN_crypto_sign_keypair(unsigned char *pk,
         unsigned char *sk) {
 
-	printf("\n\n--- TEST ---\n\n");
+	printf("\n\n--- TEST PQCLEAN_CROSSRSDP128SMALL_CLEAN_crypto_sign_keypair ---\n\n");
 
 	printf("\n--- KEYGEN ---\n");
 /* Variant */
