@@ -43,7 +43,7 @@ int PQCLEAN_CROSSRSDP128SMALL_CLEAN_crypto_sign_keypair(unsigned char *pk,
 	PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_keygen((prikey_t *) sk,
 	        (pubkey_t *) pk);
 
-	return 1;
+	return 11;
 
 	//return 0; // NIST convention: 0 == zero errors
 } // end PQCLEAN_CROSSRSDP128SMALL_CLEAN_crypto_sign_keypair

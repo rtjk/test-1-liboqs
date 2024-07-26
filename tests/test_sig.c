@@ -93,6 +93,9 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 
 	//fprintf(stderr, "\n*** KYEPAIR ***\n");
 
+	printf("\n*** KEYPAIR ***\n");
+	fflush(stdout);
+
 	rc = OQS_SIG_keypair(sig, public_key, secret_key);
 	OQS_TEST_CT_DECLASSIFY(&rc, sizeof rc);
 	if (rc != OQS_SUCCESS) {
