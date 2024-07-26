@@ -150,6 +150,15 @@ int PQCLEAN_CROSSRSDP128SMALL_AVX2_crypto_sign_signature(unsigned char *sig, siz
     printf("\n"); 
 	fflush(stdout);
 
+	printf("%d\n", PQCLEAN_CROSSRSDP128SMALL_AVX2_CRYPTO_SECRETKEYBYTES);
+	fflush(stdout);
+	printf("%d\n", PQCLEAN_CROSSRSDP128SMALL_AVX2_CRYPTO_PUBLICKEYBYTES);
+	fflush(stdout);
+	printf("%d\n", PQCLEAN_CROSSRSDP128SMALL_AVX2_CRYPTO_BYTES);
+	fflush(stdout);
+	printf("%d\n", PQCLEAN_CROSSRSDP128SMALL_AVX2_CRYPTO_RANDOMBYTES);
+	fflush(stdout);
+	
 	printf("\n--- CALL CROSS_SIGN ---\n");
 	fflush(stdout);
 
