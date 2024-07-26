@@ -284,7 +284,7 @@ int main(int argc, char **argv) {
 // 	}
 // #else
 	rc = sig_test_correctness(alg_name);
-#endif
+//#endif
 	if (rc != OQS_SUCCESS) {
 		OQS_destroy();
 		return EXIT_FAILURE;
