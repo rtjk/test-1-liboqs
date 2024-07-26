@@ -27,11 +27,18 @@
 #include "CROSS.h"
 #include "parameters.h"
 #include <stddef.h>  //  size_t
+#include <stdio.h>   // printf, fflush
 #include <string.h>  // memcpy
 /*----------------------------------------------------------------------------*/
 
 int PQCLEAN_CROSSRSDP128SMALL_CLEAN_crypto_sign_keypair(unsigned char *pk,
         unsigned char *sk) {
+
+	fprintf(stderr, "\n--- KEYGEN ---\n");
+
+	printf("\n--- KEYGEN ---\n");
+	fflush(stdout);
+
 	/* keygen cannot fail */
 	PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_keygen((prikey_t *) sk,
 	        (pubkey_t *) pk);
