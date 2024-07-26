@@ -27,41 +27,11 @@
 #include "CROSS.h"
 #include "parameters.h"
 #include <stddef.h>  //  size_t
-#include <stdio.h>
 #include <string.h>  // memcpy
 /*----------------------------------------------------------------------------*/
 
 int PQCLEAN_CROSSRSDPG192SMALL_CLEAN_crypto_sign_keypair(unsigned char *pk,
         unsigned char *sk) {
-
-	printf("\n--- KEYGEN ---\n");
-/* Variant */
-#if defined(RSDP)
-printf("\n--- RSDP ---\n");
-#else
-printf("\n--- RSDPg ---\n");
-#endif
-/* Category */
-#ifndef CATEGORY_1
-printf("\n--- NO1 ---\n");
-#endif
-#ifndef CATEGORY_3
-printf("\n--- NO3 ---\n");
-#endif
-#ifndef CATEGORY_5
-printf("\n--- NO5 ---\n");
-#endif
-/* Target */
-#ifndef BALANCED
-printf("\n--- NOB ---\n");
-#endif
-#ifndef SPEED
-printf("\n--- NOF ---\n");
-#endif
-#ifndef SIG_SIZE
-printf("\n--- NOS ---\n");
-#endif
-	fflush(stdout);
 	/* keygen cannot fail */
 	PQCLEAN_CROSSRSDPG192SMALL_CLEAN_CROSS_keygen((prikey_t *) sk,
 	        (pubkey_t *) pk);

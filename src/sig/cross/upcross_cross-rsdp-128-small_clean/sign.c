@@ -27,82 +27,16 @@
 #include "CROSS.h"
 #include "parameters.h"
 #include <stddef.h>  //  size_t
-#include <stdio.h>
 #include <string.h>  // memcpy
 /*----------------------------------------------------------------------------*/
 
 int PQCLEAN_CROSSRSDP128SMALL_CLEAN_crypto_sign_keypair(unsigned char *pk,
         unsigned char *sk) {
-
-	printf("\n\n--- TEST PQCLEAN_CROSSRSDP128SMALL_CLEAN_crypto_sign_keypair ---\n\n");
-
-	printf("\n--- KEYGEN ---\n");
-/* Variant */
-#if defined(RSDP)
-printf("\n--- RSDP ---\n");
-#else
-printf("\n--- RSDPg ---\n");
-#endif
-/* Category */
-#ifndef CATEGORY_1
-printf("\n--- NO1 ---\n");
-#endif
-#ifndef CATEGORY_3
-printf("\n--- NO3 ---\n");
-#endif
-#ifndef CATEGORY_5
-printf("\n--- NO5 ---\n");
-#endif
-/* Target */
-#ifndef BALANCED
-printf("\n--- NOB ---\n");
-#endif
-#ifndef SPEED
-printf("\n--- NOF ---\n");
-#endif
-#ifndef SIG_SIZE
-printf("\n--- NOS ---\n");
-#endif
-	fflush(stdout);
-
-	//f//printf(stderr, "\n--- KEYGEN ---\n");
-
-	//printf("\n--- KEYGEN ---\n");
-/* Variant */
-#if defined(RSDP)
-printf("\n--- RSDP ---\n");
-#else
-printf("\n--- RSDPg ---\n");
-#endif
-/* Category */
-#ifndef CATEGORY_1
-printf("\n--- NO1 ---\n");
-#endif
-#ifndef CATEGORY_3
-printf("\n--- NO3 ---\n");
-#endif
-#ifndef CATEGORY_5
-printf("\n--- NO5 ---\n");
-#endif
-/* Target */
-#ifndef BALANCED
-printf("\n--- NOB ---\n");
-#endif
-#ifndef SPEED
-printf("\n--- NOF ---\n");
-#endif
-#ifndef SIG_SIZE
-printf("\n--- NOS ---\n");
-#endif
-	//fflush(stdout);
-
 	/* keygen cannot fail */
 	PQCLEAN_CROSSRSDP128SMALL_CLEAN_CROSS_keygen((prikey_t *) sk,
 	        (pubkey_t *) pk);
 
-	return 11;
-
-	//return 0; // NIST convention: 0 == zero errors
+	return 0; // NIST convention: 0 == zero errors
 } // end PQCLEAN_CROSSRSDP128SMALL_CLEAN_crypto_sign_keypair
 
 /*----------------------------------------------------------------------------*/

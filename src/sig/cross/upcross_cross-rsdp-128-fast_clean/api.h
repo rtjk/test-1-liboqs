@@ -30,7 +30,6 @@
 
 #include <stddef.h>
 #include <stdint.h>
-#include <stdio.h>
 
 #define PQCLEAN_CROSSRSDP128FAST_CLEAN_CRYPTO_ALGNAME "cross-rsdp-128-fast"
 

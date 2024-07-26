@@ -45,8 +45,6 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 	magic_t magic;
 	OQS_randombytes(magic.val, sizeof(magic_t));
 
-	//fprintf(stderr, "\n*** TEST_SIG ***\n");
-
 	sig = OQS_SIG_new(method_name);
 	if (sig == NULL) {
 		fprintf(stderr, "ERROR: OQS_SIG_new failed\n");
@@ -56,10 +54,6 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 	printf("================================================================================\n");
 	printf("Sample computation for signature %s\n", sig->method_name);
 	printf("================================================================================\n");
-
-	// for(int i=0; i<1000; i++){
-	// 	fflush(stdout);
-	// }
 
 	public_key = malloc(sig->length_public_key + 2 * sizeof(magic_t));
 	secret_key = malloc(sig->length_secret_key + 2 * sizeof(magic_t));
@@ -91,11 +85,6 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 	OQS_randombytes(message, message_len);
 	OQS_TEST_CT_DECLASSIFY(message, message_len);
 
-	//fprintf(stderr, "\n*** KYEPAIR ***\n");
-
-	printf("\n*** KEYPAIR ***\n");
-	fflush(stdout);
-
 	rc = OQS_SIG_keypair(sig, public_key, secret_key);
 	OQS_TEST_CT_DECLASSIFY(&rc, sizeof rc);
 	if (rc != OQS_SUCCESS) {
@@ -103,33 +92,12 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 		goto err;
 	}
 
-	// printf("signature name: %s\n", sig->method_name);
-	// fflush(stdout);
-
-	//fprintf(stderr, "\n*** SIGN 1 ***\n");
-
-	printf("\n*** BEFORE SIGN ***\n");
-	fflush(stdout);
-
-	OQS_SIG_sign(sig, signature, &signature_len, message, message_len, secret_key);
-
-	printf("\n*** AFTER SIGN ***\n");
-	fflush(stdout);
-
-	//fprintf(stderr, "\n*** SIGN 2 ***\n");
-	
 	rc = OQS_SIG_sign(sig, signature, &signature_len, message, message_len, secret_key);
-
 	OQS_TEST_CT_DECLASSIFY(&rc, sizeof rc);
-
-	//fprintf(stderr, "\n*** SIGN 3 ***\n");
-
 	if (rc != OQS_SUCCESS) {
 		fprintf(stderr, "ERROR: OQS_SIG_sign failed\n");
 		goto err;
 	}
-
-	fprintf(stderr, "\n*** VERIFY ***\n");
 
 	OQS_TEST_CT_DECLASSIFY(public_key, sig->length_public_key);
 	OQS_TEST_CT_DECLASSIFY(signature, signature_len);
@@ -139,8 +107,6 @@ static OQS_STATUS sig_test_correctness(const char *method_name) {
 		fprintf(stderr, "ERROR: OQS_SIG_verify failed\n");
 		goto err;
 	}
-
-	//fprintf(stderr, "\n*** REVERIFY ***\n");
 
 	/* modify the signature to invalidate it */
 	OQS_randombytes(signature, signature_len);
@@ -256,35 +222,35 @@ int main(int argc, char **argv) {
 #endif
 
 	OQS_STATUS rc;
-// #if OQS_USE_PTHREADS
-// #define MAX_LEN_SIG_NAME_ 64
-// 	// don't run MAYO_5 in threads because of large stack usage
-// 	char no_thread_sig_patterns[][MAX_LEN_SIG_NAME_]  = {"MAYO-5"};
-// 	int test_in_thread = 1;
-// 	for (size_t i = 0 ; i < sizeof(no_thread_sig_patterns) / MAX_LEN_SIG_NAME_; ++i) {
-// 		if (strstr(alg_name, no_thread_sig_patterns[i]) != NULL) {
-// 			test_in_thread = 0;
-// 			break;
-// 		}
-// 	}
-// 	if (test_in_thread) {
-// 		pthread_t thread;
-// 		struct thread_data td;
-// 		td.alg_name = alg_name;
-// 		int trc = pthread_create(&thread, NULL, test_wrapper, &td);
-// 		if (trc) {
-// 			fprintf(stderr, "ERROR: Creating pthread\n");
-// 			OQS_destroy();
-// 			return EXIT_FAILURE;
-// 		}
-// 		pthread_join(thread, NULL);
-// 		rc = td.rc;
-// 	} else {
-// 		rc = sig_test_correctness(alg_name);
-// 	}
-// #else
+#if OQS_USE_PTHREADS
+#define MAX_LEN_SIG_NAME_ 64
+	// don't run MAYO_5 in threads because of large stack usage
+	char no_thread_sig_patterns[][MAX_LEN_SIG_NAME_]  = {"MAYO-5","cross-rsdp-128-small","cross-rsdp-192-small","cross-rsdp-256-balanced","cross-rsdp-256-small","cross-rsdpg-192-small","cross-rsdpg-256-small"};
+	int test_in_thread = 1;
+	for (size_t i = 0 ; i < sizeof(no_thread_sig_patterns) / MAX_LEN_SIG_NAME_; ++i) {
+		if (strstr(alg_name, no_thread_sig_patterns[i]) != NULL) {
+			test_in_thread = 0;
+			break;
+		}
+	}
+	if (test_in_thread) {
+		pthread_t thread;
+		struct thread_data td;
+		td.alg_name = alg_name;
+		int trc = pthread_create(&thread, NULL, test_wrapper, &td);
+		if (trc) {
+			fprintf(stderr, "ERROR: Creating pthread\n");
+			OQS_destroy();
+			return EXIT_FAILURE;
+		}
+		pthread_join(thread, NULL);
+		rc = td.rc;
+	} else {
+		rc = sig_test_correctness(alg_name);
+	}
+#else
 	rc = sig_test_correctness(alg_name);
-//#endif
+#endif
 	if (rc != OQS_SUCCESS) {
 		OQS_destroy();
 		return EXIT_FAILURE;

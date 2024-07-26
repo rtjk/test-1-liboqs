@@ -27,43 +27,11 @@
 #include "CROSS.h"
 #include "parameters.h"
 #include <stddef.h>  //  size_t
-#include <stdio.h>
 #include <string.h>  // memcpy
 /*----------------------------------------------------------------------------*/
 
 int PQCLEAN_CROSSRSDP128SMALL_AVX2_crypto_sign_keypair(unsigned char *pk,
         unsigned char *sk) {
-
-	printf("\n--- TEST PQCLEAN_CROSSRSDP128SMALL_AVX2_crypto_sign_keypair ---\n");
-
-	printf("\n--- KEYGEN ---\n");
-/* Variant */
-#if defined(RSDP)
-printf("\n--- RSDP ---\n");
-#else
-printf("\n--- RSDPg ---\n");
-#endif
-/* Category */
-#ifndef CATEGORY_1
-printf("\n--- NO1 ---\n");
-#endif
-#ifndef CATEGORY_3
-printf("\n--- NO3 ---\n");
-#endif
-#ifndef CATEGORY_5
-printf("\n--- NO5 ---\n");
-#endif
-/* Target */
-#ifndef BALANCED
-printf("\n--- NOB ---\n");
-#endif
-#ifndef SPEED
-printf("\n--- NOF ---\n");
-#endif
-#ifndef SIG_SIZE
-printf("\n--- NOS ---\n");
-#endif
-	fflush(stdout);
 	/* keygen cannot fail */
 	PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_keygen((prikey_t *) sk,
 	        (pubkey_t *) pk);
@@ -80,14 +48,10 @@ int PQCLEAN_CROSSRSDP128SMALL_AVX2_crypto_sign(unsigned char *sm,
         size_t *smlen,     // out parameter
         const unsigned char *m, size_t mlen,  // in parameter
         const unsigned char *sk) {                        // in parameter
-
-	printf("\n--- SIGN ---\n");
-	fflush(stdout);
-
 	/* sign cannot fail */
 	memcpy(sm, m, mlen);
-	PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(( prikey_t *) sk,                               // in parameter
-	        (char *) m, ( size_t) mlen,         // in parameter
+	PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign((const prikey_t *) sk,                               // in parameter
+	        (const char *const) m, (const size_t) mlen,         // in parameter
 	        (CROSS_sig_t *) (sm + mlen));                               // out parameter
 	*smlen = mlen + (size_t) sizeof(CROSS_sig_t);
 
@@ -121,59 +85,14 @@ int PQCLEAN_CROSSRSDP128SMALL_AVX2_crypto_sign_open(unsigned char *m,
 /*... generating a signature sig[0],sig[1],...,sig[*siglen-1]                */
 /*... from original message m[0],m[1],...,m[mlen-1]                           */
 /*... under secret key sk[0],sk[1],...                                        */
-#include <stdlib.h>
 int PQCLEAN_CROSSRSDP128SMALL_AVX2_crypto_sign_signature(unsigned char *sig, size_t *siglen,         // out parameter
         const unsigned char *m, size_t mlen,                  // in parameter
         const unsigned char *sk                                 // in parameter
                                                         ) {
-
-	printf("\n--- SIGN SIGNATURE ---\n");
-	fflush(stdout);
-
-	printf("mlen: %ld\n", mlen);
-	fflush(stdout);
-
-	printf("sk: ");
-	fflush(stdout);
-	for (size_t i = 0; i < PQCLEAN_CROSSRSDP128SMALL_AVX2_CRYPTO_SECRETKEYBYTES; ++i) {
-		printf("%02x ", sk[i]);
-		fflush(stdout);
-	}
-	printf("\n");
-	fflush(stdout);
-
-	printf("m:  ");
-	fflush(stdout);
-	for (size_t i = 0; i < mlen; ++i) {
-        printf("%02x ", m[i]);
-		fflush(stdout);
-    }
-    printf("\n"); 
-	fflush(stdout);
-
-	printf("%d\n", PQCLEAN_CROSSRSDP128SMALL_AVX2_CRYPTO_SECRETKEYBYTES);
-	fflush(stdout);
-	printf("%d\n", PQCLEAN_CROSSRSDP128SMALL_AVX2_CRYPTO_PUBLICKEYBYTES);
-	fflush(stdout);
-	printf("%d\n", PQCLEAN_CROSSRSDP128SMALL_AVX2_CRYPTO_BYTES);
-	fflush(stdout);
-	printf("%d\n", PQCLEAN_CROSSRSDP128SMALL_AVX2_CRYPTO_RANDOMBYTES);
-	fflush(stdout);
-
-	printf("sizeof(CROSS_sig_t): %ld\n", sizeof(CROSS_sig_t));
-	fflush(stdout);
-
-	printf("\n--- CALL CROSS_SIGN ---\n");
-	fflush(stdout);
-
 	/* sign cannot fail */
-	PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign(( prikey_t *) sk,    
-	        (char *) m, ( size_t) mlen,        
-	        (CROSS_sig_t *) sig);   
-
-	printf("\n--- EXIT CROSS_SIGN ---\n");
-	fflush(stdout);
-
+	PQCLEAN_CROSSRSDP128SMALL_AVX2_CROSS_sign((const prikey_t *) sk,                                    // in parameter
+	        (const char *const) m, (const size_t) mlen,              // in parameter
+	        (CROSS_sig_t *) sig);                                            // out parameter
 	*siglen = (size_t) sizeof(CROSS_sig_t);
 
 	return 0;  // NIST convention: 0 == zero errors
